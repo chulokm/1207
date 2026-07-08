@@ -60,6 +60,8 @@ elif txt == "Bro":
     caption="舰长你掉到第11名了",
     width="stretch",
     )
+else:
+    st.wwrite("什么都没有发生------")
 st.video(r"HD1.mp4")#仅image自带caption
 st.caption("正在看海")
 st.logo(r"YY.jpg")#左上角logo
