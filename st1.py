@@ -14,7 +14,7 @@ df = pd.DataFrame({
     "运行人":["重装小兔","Bronya"],
     "身份":["协同者","BOSS"]})
 st.dataframe(df)
-img = Image.open(r"XT.jpg")#绝对路径获取
+img = Image.open(r"图片\lvo\XT.jpg")#绝对路径获取
 click_js = """
  <script>
  setTimeout(()=>{
@@ -26,11 +26,38 @@ click_js = """
 placeholder = st.empty()#把开始播放藏在按钮里
 with placeholder:
      if st.button(""):
-         st.audio(r"HOYO-MiX - Gion2.flac", loop=True, autoplay=True)
+         st.audio(r"音乐\HOYO-MiX - Gion2.flac", loop=True, autoplay=True)
 st.markdown(":blue-badge[----点击方块循环护肝的小曲----]")
 st.image(
     img,
     caption="正在工作-----",
+    width="stretch",
+    )
+txt=st.text_input(
+    label = "正在寻找",
+    value = "",
+    max_chars = 100,
+    placeholder = "(白希/黑希/Bro)",
+    key = "sore")
+if txt == "白希":
+    img1 = Image.open(r"BX1.jpg")
+    st.image(
+    img1,
+    caption="你好呀,舰长~",
+    width="stretch",
+    )
+elif txt == "黑希":
+    img2 = Image.open(r"HX1.jpg")
+    st.image(
+    img2,
+    caption="找我有什么事吗,舰长?",
+    width="stretch",
+    )
+elif txt == "Bro":
+    img3 = Image.open(r"YY1.jpg")
+    st.image(
+    img3,
+    caption="舰长你掉到第11名了",
     width="stretch",
     )
 st.video(r"HD1.mp4")#仅image自带caption
