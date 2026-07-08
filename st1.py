@@ -14,7 +14,7 @@ df = pd.DataFrame({
     "运行人":["重装小兔","Bronya"],
     "身份":["协同者","BOSS"]})
 st.dataframe(df)
-img = Image.open(r"图片\lvo\XT.jpg")#绝对路径获取
+img = Image.open(r"XT.jpg")#绝对路径获取
 click_js = """
  <script>
  setTimeout(()=>{
@@ -26,7 +26,7 @@ click_js = """
 placeholder = st.empty()#把开始播放藏在按钮里
 with placeholder:
      if st.button(""):
-         st.audio(r"音乐\HOYO-MiX - Gion2.flac", loop=True, autoplay=True)
+         st.audio(r"HOYO-MiX - Gion2.flac", loop=True, autoplay=True)
 st.markdown(":blue-badge[----点击方块循环护肝的小曲----]")
 st.image(
     img,
