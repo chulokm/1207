@@ -26,13 +26,13 @@ click_js = """
 placeholder = st.empty()#把开始播放藏在按钮里
 with placeholder:
      if st.button(""):
-         st.audio(r"D:\音乐\HOYO-MiX - Gion2.flac", loop=True, autoplay=True)
+         st.audio(r"音乐\HOYO-MiX - Gion2.flac", loop=True, autoplay=True)
 st.markdown(":blue-badge[----点击方块循环护肝的小曲----]")
 st.image(
     img,
     caption="正在工作-----",
     width="stretch",
     )
-st.video(r"D:\视频\HD1.mp4")#仅image自带caption
+st.video(r"视频\HD1.mp4")#仅image自带caption
 st.caption("正在看海")
-st.logo(r"D:\图片\lvo\YY.jpg")#左上角logo
+st.logo(r"图片\lvo\YY.jpg")#左上角logo
