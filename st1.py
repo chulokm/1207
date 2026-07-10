@@ -52,7 +52,7 @@ else:
         with placeholder:
              if st.button(""):
                  st.audio(r"HOYO-MiX - Gion2.flac", loop=True, autoplay=True)
-        st.markdown(":blue-badge[----点击方块循环护肝的小曲----]")
+        st.markdown(":blue-badge[⬆️点击方块循环护肝的小曲----]")
         st.image(
             img,
             caption="正在工作-----",
@@ -86,19 +86,19 @@ else:
                 img3 = Image.open(r"YY1.jpg")
                 st.image(
                 img3,
-                caption="舰长你掉到第11名了",
+                caption="舰长你深渊掉到第11名了",
                 width="stretch",
                 )
             else:
                 st.write("什么都没有发生------")
         choice = st.radio(
             label = "现在要做什么呢?:",
-            options = ["和Bronya玩游戏","和希儿出去玩","扫甲板"],
+            options = ["和Bronya玩游戏","和希儿们出去玩","扫甲板"],
             index = None,
             key = 1018,
             help = "发呆中-------",
-            captions = ["Bronya正在等待","希儿两眼放光","爱衣的肯定"])
-        if choice == "和希儿出去玩":
+            captions = ["Bronya正在等待","希儿们两眼放光","爱衣的肯定"])
+        if choice == "和希儿们出去玩":
                 col1,col2 = st.columns(2)#多图片并排
                 with col1:
                         st.image("HX2.png",caption = "快跟上,舰长")
