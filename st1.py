@@ -34,11 +34,7 @@ else:
     ["首页","加入我们","获取更多", "补充美好能量", "开饭时间!"])
     if page == "首页":
         st.title("欢迎登舰~")
-        st.title("已载入")
-        st.divider()
-        st.header("加载中...")
-        st.divider()
-        st.subheader("加载完成")
+        st.subheader("已载入")
         st.divider()
         st.markdown(":blue-badge[Captain on the bridge]")#标记
         #st.badge("Captain on the bridge", color="blue")#标记
