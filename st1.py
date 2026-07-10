@@ -14,16 +14,21 @@ st.set_page_config(#页面设置,需要写在import之下最上面
 
         开饭时间:https://b23.tv/KL7BNyd
         """})
-accuss = st.text_input(
-    label = "输入密钥:",
-    max_chars = 100,
-    placeholder = "Seele + Bronya",
-    type = "password",
-    key = "birthday")
-if accuss != "1018818":
-    if accuss:
-        st.error("error,登舰失败----")
-elif accuss == "1018818":
+if "logged_in" not in st.session_state:#初始化登录状态,默认False未登录状态
+    st.session_state.logged_in = False
+if not st.session_state.logged_in:
+    accuss = st.text_input(
+        label = "输入密钥:",
+        max_chars = 100,
+        placeholder = "Seele + Bronya",
+        type = "password",
+        key = "birthday")
+    if st.button("登舰"):
+        if accuss == "1018818":
+            st.session_state.logged_in = True
+        else:
+                st.error("error,登舰失败----")
+else: 
     page = st.sidebar.radio(
     "导航",
     ["首页","加入我们","获取更多", "补充美好能量", "开饭时间!"])
