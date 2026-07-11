@@ -222,6 +222,8 @@ else:
             if prompt:
                 st.chat_message("我").write(prompt)
                 try:
+                    st.write("通讯加载中......")
+                    print(prompt)
                     response =  client.chat.completions.create(
                         model="qwen3.5:9b",
                         messages=[
@@ -229,13 +231,6 @@ else:
                         {"role": "user", "content": prompt},
                         ],
                         stream = False)
-                    with st.spinner("通讯加载中......"):
-                        placeholder =st.empty()
-                        full_text = ""
-                        for chunk in response:
-                            if chunk.choices[0].delta.content:
-                                full_text += chunk.choices[0].delta.content
-                                placeholder.write(full_text)
                     ai_reply = response.choices[0].message.content
                     print("-----结果:",ai_reply)
                     st.chat_message("希儿").write(ai_reply)
