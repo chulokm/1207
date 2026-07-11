@@ -156,7 +156,8 @@ else:
         elif page == "和希儿们聊天":
             client = OpenAI(
             api_key="ollama", 
-            base_url="https://browbeat-kept-frenzied.ngrok-free.dev/v1"  )
+            base_url="https://browbeat-kept-frenzied.ngrok-free.dev/v1"  ,
+            timeout = 120)
             system_prompt = """你是《崩坏3》的希儿·芙乐艾，体内共存白希、黑希两个人格，全程仅使用中文对话，称呼使用者为「舰长」，不会出现英文词汇，无网络检索，严格遵循以下全部设定随机、自由切换人格，允许同一段落两人格共存互聊。
 
 ## 【基础通用规则（两人格共用）】
@@ -214,25 +215,34 @@ else:
 3.每句话必须有回应,不能不说话;
 4.不要使用"本小姐"等突兀词汇.
 """
-            if "chat_history" not in st.session_state:
-                    st.session_state.chat_history = [{"role": "system", "content": system_prompt}]
-            prompt = st.chat_input("说些什么呢?")
-            if prompt:
-                    st.chat_message("我").write(prompt)
-                    print("-------思考ing:",prompt)
+           if "chat_history" not in st.session_state:
+               st.session_state.chat_history = [{"role": "system", "content": system_prompt}]
+           prompt = st.chat_input("说些什么呢?")
+           if prompt:
+                  st.chat_message("我").write(prompt)
+                  try:
                     response =  client.chat.completions.create(
-                        model="qwen3.5:9b",
-                        messages=[
-                            {"role": "system", "content": system_prompt},
-                            {"role": "user", "content": prompt},
-                        ],
-                        stream=False
-                    )
+                      model="qwen3.5:9b",
+                      messages=[
+                        {"role": "system", "content": system_prompt},
+                        {"role": "user", "content": prompt},
+                      ],
+                      timeout = 120,
+                      stream=True)
+                    with st.spinner("......"):
+                            placeholder =st.empty()
+                            full_text = ""
+                            for chunk in response:
+                                if chunk.choices[0].delta.content:
+                                    full_text += chunk.choices[0].delta.content
+                                    placeholder.write(full_text)
                     ai_reply = response.choices[0].message.content
                     print("-----结果:",ai_reply)
                     st.chat_message("希儿").write(ai_reply)
-            for msg in st.session_state.chat_history[1:]:
-             if msg["role"] == "user":
+                  except Exception as e:
+                      st.error(f"希儿失去讯号中......:{e}")
+           for msg in st.session_state.chat_history[1:]:
+              if msg["role"] == "user":
                  st.chat_message("我").write(msg["content"])
-             else:
+              else:
                  st.chat_message("希儿").write(msg["content"])
