@@ -7,7 +7,7 @@ from openai import OpenAI
 
 st.set_page_config(#页面设置,需要写在import之下最上面
     page_title = "休伯利安",
-    page_icon = "图片/lvo/DLS.jpg",
+    page_icon = "DLS.jpg",
     layout = "wide",
     initial_sidebar_state="expanded",
     menu_items = {
@@ -62,7 +62,7 @@ else:
             st.markdown(":blue-badge[Captain on the bridge]")#标记
             #st.badge("Captain on the bridge", color="blue")#标记
             st.caption("舰长已抵达舰桥")#注释
-            img = Image.open(r"图片\lvo\XT.jpg")#绝对路径获取
+            img = Image.open(r"XT.jpg")#绝对路径获取
             click_js = """
              <script>
              setTimeout(()=>{
@@ -74,16 +74,16 @@ else:
             placeholder = st.empty()#把开始播放藏在按钮里
             with placeholder:
                  if st.button(""):
-                     st.audio(r"音乐\HOYO-MiX - Gion2.flac", loop=True, autoplay=True)
+                     st.audio(r"HOYO-MiX - Gion2.flac", loop=True, autoplay=True)
             st.markdown(":blue-badge[⬆️点击方块循环护肝的小曲----]")
             st.image(
                 img,
                 caption="正在工作-----",
                 width="stretch",
                 )
-            st.video(r"视频\HD1.mp4")#仅image自带caption
+            st.video(r"HD1.mp4")#仅image自带caption
             st.caption("正在看海")
-            st.logo(r"图片\lvo\YY.jpg")#左上角logo
+            st.logo(r"YY.jpg")#左上角logo
             txt=st.text_input(
             label = "正在寻找",
             value = "",
@@ -92,21 +92,21 @@ else:
             key = "sore")
             if txt:
                 if txt == "白希":
-                    img1 = Image.open(r"图片\lvo\BX1.jpg")
+                    img1 = Image.open(r"BX1.jpg")
                     st.image(
                     img1,
                     caption="你好呀,舰长~",
                     width="stretch",
                     )
                 elif txt == "黑希":
-                    img2 = Image.open(r"图片\lvo\HX1.jpg")
+                    img2 = Image.open(r"HX1.jpg")
                     st.image(
                     img2,
                     caption="找我有什么事吗,舰长?",
                     width="stretch",
                     )
                 elif txt == "Bro":
-                    img3 = Image.open(r"图片\lvo\YY1.jpg")
+                    img3 = Image.open(r"YY1.jpg")
                     st.image(
                     img3,
                     caption="舰长你深渊掉到第11名了",
@@ -124,18 +124,18 @@ else:
             if choice == "和希儿们出去玩":
                     col1,col2 = st.columns(2)#多图片并排
                     with col1:
-                            st.image("图片/lvo/HX2.png",caption = "快跟上,舰长")
+                            st.image("HX2.png",caption = "快跟上,舰长")
                     with col2:
-                            st.image("图片/lvo/BX3.png",caption = "我们快出发吧~") 
+                            st.image("BX3.png",caption = "我们快出发吧~") 
             elif choice == "和Bronya玩游戏":
-                    img2 = Image.open(r"图片\lvo\YY2.jpg")
+                    img2 = Image.open(r"YY2.jpg")
                     st.image(
                     img2,
                     caption="别楞着了,快拿着",
                     width="stretch",
                     )
             elif choice == "扫甲板":
-                    img3 = Image.open(r"图片\lvo\AY.jpg")
+                    img3 = Image.open(r"AY.jpg")
                     st.image(
                     img3,
                     caption="老板还真是勤奋呢~",
