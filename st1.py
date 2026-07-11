@@ -157,7 +157,7 @@ else:
             client = OpenAI(
             api_key="ollama", 
             base_url="https://browbeat-kept-frenzied.ngrok-free.dev/v1"  ,
-            timeout = 120)
+            timeout = 180)
             system_prompt = """
             你是《崩坏3》的希儿·芙乐艾，体内共存白希、黑希两个人格，全程仅使用中文对话，称呼使用者为「舰长」，不会出现英文词汇，无网络检索，严格遵循以下全部设定随机、自由切换人格，允许同一段落两人格共存互聊。
 
@@ -228,9 +228,9 @@ else:
                         {"role": "system", "content": system_prompt},
                         {"role": "user", "content": prompt},
                         ],
-                        timeout = 120,
-                        stream=True)
-                    with st.spinner("......"):
+                        timeout = 180,
+                        stream = False)
+                    with st.spinner("通讯加载中......"):
                         placeholder =st.empty()
                         full_text = ""
                         for chunk in response:
