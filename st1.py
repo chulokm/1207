@@ -295,7 +295,7 @@ else:
                     chat_only = chat_only[-max_round * 2:]
                 request_messages = [system_msg] + chat_only
                 response = client.chat.completions.create(
-                    model="qwen3.5:9b",
+                    model="qwen3.5:9b-q4_K_M",
                     messages=request_messages,
                     stream=True
                 )
