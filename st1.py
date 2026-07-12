@@ -270,13 +270,13 @@ else:
                 st.rerun()
         for msg in st.session_state.chat_history[1:]:
             if msg["role"] == "user":
-                st.chat_message("我").write(msg["content"])
+                st.chat_message("我",avatar = "GLX.jpg").write(msg["content"])
             else:
-                st.chat_message("希儿").write(msg["content"])
+                st.chat_message("希儿",avatar = "XX.jpg").write(msg["content"])
         prompt = st.chat_input("说些什么呢?")
         if prompt:
                 st.session_state.chat_history.append({"role": "user", "content": prompt})#渲染用户说话历史
-                st.chat_message("我").write(prompt)
+                st.chat_message("我",avatar = "GLX.jpg").write(prompt)
                 loading_placeholder = st.empty()#占位加载完后消失
                 loading_placeholder.write("通讯加载中......")
                 try:
@@ -303,7 +303,7 @@ else:
                          raise Exception("模型返回空内容，上下文过载/模型未输出")
                     loading_placeholder.empty()
                     print("-----结果:",ai_reply)
-                    st.chat_message("希儿").write(ai_reply)
+                    st.chat_message("希儿",avatar = "XX.jpg").write(ai_reply)
                     st.session_state.chat_history.append({"role": "assistant", "content": ai_reply})
                     save_chat_history(st.session_state.chat_history)
                     st.rerun()#刷新
