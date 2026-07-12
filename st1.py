@@ -264,20 +264,20 @@ else:
             st.session_state.chat_history = load_chat_history()
         with st.sidebar:
             if st.button("清空全部对话历史", use_container_width=True):
-            clean_history = [{"role": "system", "content": system_prompt}]
-            st.session_state.chat_history = clean_history
-            st.session_state.notice_showed = False#强制写入新的json覆盖
-            save_chat_history(st.session_state.chat_history)
-            st.rerun()
+                clean_history = [{"role": "system", "content": system_prompt}]
+                st.session_state.chat_history = clean_history
+                st.session_state.notice_showed = False#强制写入新的json覆盖
+                save_chat_history(st.session_state.chat_history)
+                st.rerun()
         for msg in st.session_state.chat_history[1:]:
             if msg["role"] == "user":
-                st.chat_message("我",avatar = "图片/lvo/GLX.jpg").write(msg["content"])
+                st.chat_message("我",avatar = "GLX.jpg").write(msg["content"])
             else:
-                st.chat_message("希儿",avatar = "图片/lvo/XX.jpg").write(msg["content"])
+                st.chat_message("希儿",avatar = "XX.jpg").write(msg["content"])
         prompt = st.chat_input("说些什么呢?")
         if prompt:
             st.session_state.chat_history.append({"role": "user", "content": prompt})
-            st.chat_message("我",avatar = "图片/lvo/GLX.jpg").write(prompt)
+            st.chat_message("我",avatar = "GLX.jpg").write(prompt)
             loading_placeholder = st.empty()
             loading_placeholder.write("通讯加载中......")
             try:
@@ -300,7 +300,7 @@ else:
                     stream=True
                 )
                 loading_placeholder.empty()
-                ai_box = st.chat_message("希儿", avatar="图片/lvo/XX.jpg")
+                ai_box = st.chat_message("希儿", avatar="XX.jpg")
                 text_box = ai_box.empty()
                 full_reply = ""
                 for chunk in response:
