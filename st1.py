@@ -84,7 +84,7 @@ st.markdown(
         """
         <style>
         .stApp {
-            background-image: url("图片/lvo/BX4.jpg");
+            background-image: url("BX4.jpg");
             background-size: cover;
             background-position:center;
             background-repeat:no-repeat;
@@ -304,7 +304,7 @@ else:
                 ]
                 request_messages = [system_msg] + chat_only
                 response = client.chat.completions.create(
-                    model="qwen3.5:9b-q4_K_M"",
+                    model="qwen3.5:9b-q4_K_M",
                     messages=request_messages,
                     stream=True,
                     extra_body={
