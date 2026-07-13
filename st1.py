@@ -111,6 +111,11 @@ def load_chat_history():
 def save_chat_history(history):
      with open(CHAT_FILE, "w", encoding="utf-8") as f:
          json.dump(history, f, ensure_ascii=False, indent=2)
+def trim_text(text, max_len=1000):
+     s = text.strip()
+     if len(s) > max_len:
+         return s[:max_len] + "..."
+     return s
 if "logged_in" not in st.session_state:#初始化登录状态,默认False未登录状态
     st.session_state.logged_in = False
 if not st.session_state.logged_in:
@@ -260,61 +265,77 @@ else:
         api_key="ollama", 
         base_url="https://browbeat-kept-frenzied.ngrok-free.dev/v1"  ,
         )
-        if "chat_history" not in st.session_state:
-            st.session_state.chat_history = load_chat_history()
-        with st.sidebar:
-            if st.button("清空全部对话历史", use_container_width=True):
-                clean_history = [{"role": "system", "content": system_prompt}]
-                st.session_state.chat_history = clean_history
-                st.session_state.notice_showed = False#强制写入新的json覆盖
-                save_chat_history(st.session_state.chat_history)
-                st.rerun()
-        for msg in st.session_state.chat_history[1:]:
-            if msg["role"] == "user":
-                st.chat_message("我",avatar = "GLX.jpg").write(msg["content"])
-            else:
-                st.chat_message("希儿",avatar = "XX.jpg").write(msg["content"])
-        prompt = st.chat_input("说些什么呢?")
-        if prompt:
-            st.session_state.chat_history.append({"role": "user", "content": prompt})
-            st.chat_message("我",avatar = "GLX.jpg").write(prompt)
-            loading_placeholder = st.empty()
-            loading_placeholder.write("通讯加载中......")
-            try:
-                print(prompt)
-                raw_history = st.session_state.chat_history.copy()
-                if not raw_history:
-                    raw_history = [{"role":"system","content":system_prompt}]
-                if raw_history[0]["role"] == "system":
-                    system_msg = raw_history[0]
-                else:
-                    system_msg = {"role":"system","content":system_prompt}
-                chat_only = [msg for msg in raw_history[1:] if msg["role"] in ("user","assistant")]
-                max_round = 6
-                if len(chat_only) > max_round * 2:
-                    chat_only = chat_only[-max_round * 2:]
-                request_messages = [system_msg] + chat_only
-                response = client.chat.completions.create(
-                    model="qwen3.5:9b-q4_K_M",
-                    messages=request_messages,
-                    stream=True
-                )
-                loading_placeholder.empty()
-                ai_box = st.chat_message("希儿", avatar="XX.jpg")
-                text_box = ai_box.empty()
-                full_reply = ""
-                for chunk in response:
-                    delta = chunk.choices[0].delta.content
-                    if delta is not None:
-                        full_reply += delta
-                        text_box.write(full_reply)
-                if not full_reply or full_reply.strip() == "":
-                    raise Exception("模型返回空内容，上下文过载/模型未输出")
-                print("-----结果:",full_reply)
-                st.session_state.chat_history.append({"role": "assistant", "content": full_reply})
-                save_chat_history(st.session_state.chat_history)
-                st.rerun()
-            except Exception as e:
-                loading_placeholder.empty()
+     if "chat_history" not in st.session_state:
+         st.session_state.chat_history = load_chat_history()
+     with st.sidebar:
+         if st.button("清空全部对话历史", use_container_width=True):
+             clean_history = [{"role": "system", "content": system_prompt}]
+             st.session_state.chat_history = clean_history
+             st.session_state.notice_showed = False#强制写入新的json覆盖
+             save_chat_history(st.session_state.chat_history)
+             st.rerun()
+     for msg in st.session_state.chat_history[1:]:
+         if msg["role"] == "user":
+             st.chat_message("我",avatar = "GLX.jpg").write(msg["content"])
+         else:
+             st.chat_message("希儿",avatar = "XX.jpg").write(msg["content"])
+     prompt = st.chat_input("说些什么呢?")
+     if prompt:
+         st.session_state.chat_history.append({"role": "user", "content": prompt})
+         st.chat_message("我",avatar = "GLX.jpg").write(prompt)
+         loading_placeholder = st.empty()
+         loading_placeholder.write("通讯加载中......")
+         try:
+             print(prompt)
+             raw_history = st.session_state.chat_history.copy()
+             if not raw_history:
+                 raw_history = [{"role":"system","content":system_prompt}]
+             if raw_history[0]["role"] == "system":
+                 system_msg = raw_history[0]
+             else:
+                 system_msg = {"role":"system","content":system_prompt}
+             chat_only = [msg for msg in raw_history[1:] if msg["role"] in ("user","assistant")]
+             max_round = 4#记忆轮数
+             if len(chat_only) > max_round * 2:
+                 chat_only = chat_only[-max_round * 2:]
+             chat_only = [
+                 {"role": m["role"], "content": trim_text(m["content"])}
+                 for m in chat_only
+             ]
+             request_messages = [system_msg] + chat_only
+             response = client.chat.completions.create(
+                 model="qwen3.5:9b",
+                 messages=request_messages,
+                 stream=True,
+                 extra_body={
+                     "num_ctx":24576,
+                     "num_predict":1024,
+                     "think":False
+                     }
+             )
+             loading_placeholder.empty()
+             ai_box = st.chat_message("希儿", avatar="XX.jpg")
+             text_box = ai_box.empty()
+             full_reply = ""
+             for chunk in response:
+                 if chunk.choices[0].delta.content is not None:
+                     delta = chunk.choices[0].delta.content
+                     full_reply += delta
+                     text_box.write(full_reply)
+                     print(full_reply)
+             #if full_reply and full_reply.strip():
+             st.session_state.chat_history.append({
+                     "role": "assistant",
+                     "content": full_reply
+                  })
+             save_chat_history(st.session_state.chat_history)
+             #else:
+               #  print("捕获空返回")
+                 #st.warning("希儿信号波动了一下，舰长再说一次吧~")
+             
+         except Exception as e:
+             loading_placeholder.empty()
+             st.error(f"希儿失去讯号中......:{e}")
+             print("capture error",e)
                 st.error(f"希儿失去讯号中......:{e}")
                 print("capture error",e)
