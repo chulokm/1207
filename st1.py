@@ -309,8 +309,7 @@ else:
                     stream=True,
                     extra_body={
                         "num_ctx":24576,
-                        "num_predict":1024,
-                        "think":False
+                        "num_predict":1024
                         }
                 )
                 loading_placeholder.empty()
@@ -318,8 +317,11 @@ else:
                 text_box = ai_box.empty()
                 full_reply = ""
                 for chunk in response:
-                    if chunk.choices[0].delta.content is not None:
-                        delta = chunk.choices[0].delta.content
+                    choice = chunk.choices[0]
+                    if choice.finish_reason is not None:
+                        break
+                    delta = choice.delta.content
+                    if delta:
                         full_reply += delta
                         text_box.write(full_reply)
                         print(full_reply)
