@@ -377,17 +377,24 @@ else:
                              st.session_state.system_prompt = f"{base}\n【额外性格特点】\n{traits}\n名字：{st.session_state.nick_name}"
                         else:
                              st.session_state.system_prompt = base
+                         st.session_state.chat_history = [{#增强人设模式下，重置系统消息
+                             "role": "system",
+                             "content": st.session_state.system_prompt
+                                }]
                     elif st.session_state.system_mode == "custom":
                         custom = custom_input.strip()
                         st.session_state.custom_prompt = custom
                         st.session_state.system_prompt = custom or DEFAULT_SYSTEM_PROMPT
                     else:  # default
                         st.session_state.system_prompt = DEFAULT_SYSTEM_PROMPT
-                    if st.session_state.chat_history:
-                        st.session_state.chat_history[0] = {
+                    # 保证第一条永远是 system
+                    if st.session_state.chat_history and st.session_state.chat_history[0]["role"] == "system":
+                        st.session_state.chat_history[0]["content"] = st.session_state.system_prompt
+                    else:
+                        st.session_state.chat_history.insert(0, {
                             "role": "system",
                             "content": st.session_state.system_prompt
-                        }
+                            })
                     save_chat_history(st.session_state.chat_history)
                     st.success("人设已应用")
                     st.rerun()
