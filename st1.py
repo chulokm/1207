@@ -378,10 +378,10 @@ else:
                              st.session_state.system_prompt = f"{base}\n【额外性格特点】\n{traits}\n名字：{st.session_state.nick_name}"
                         else:
                              st.session_state.system_prompt = base
-                         st.session_state.chat_history = [{#增强人设模式下，重置系统消息
-                             "role": "system",
-                             "content": st.session_state.system_prompt
-                                }]
+                        st.session_state.chat_history = [{
+                            "role": "system",
+                            "content": st.session_state.system_prompt
+                            }]
                     elif st.session_state.system_mode == "custom":
                         custom = custom_input.strip()
                         st.session_state.custom_prompt = custom
