@@ -298,7 +298,7 @@ else:
     elif page == "和希儿们聊天":
             client = OpenAI(
             api_key="ollama", 
-            base_url="http://127.0.0.1:11434/v1"  ,
+            base_url="https://browbeat-kept-frenzied.ngrok-free.dev/v1"  ,
             )
             DEFAULT_SYSTEM_PROMPT = LOGIN_SYSTEM_PROMPT
             if "system_mode" not in st.session_state:
