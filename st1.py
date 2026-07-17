@@ -138,7 +138,7 @@ if not st.session_state.logged_in:
                 st.error("error,登舰失败----")
 else: 
     if not st.session_state.close_notice:
-        notice_box = st.expander("📢 V0.5版本更新公告", expanded=True)
+        notice_box = st.expander("📢 版本更新公告", expanded=True)
         with notice_box:
             st.markdown("""
             <style>
