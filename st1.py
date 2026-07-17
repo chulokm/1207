@@ -154,7 +154,7 @@ else:
             <div class="notice-content">
                 <p><strong>🔖 V0.5 更新：</strong></p>
                 <ul>
-                    <li>优化了模型,丰富了回复内容,加快恢复速度减少卡顿</li>
+                    <li>优化了模型,丰富了回复内容,加快回复速度减少卡顿</li>
                 </ul>
                 <p><strong>🔖 V0.4 更新：</strong></p>
                 <ul>
