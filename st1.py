@@ -141,436 +141,435 @@ if not st.session_state.logged_in:
         else:
                 st.error("error,登舰失败----")
 else: 
-    if not st.session_state.close_notice:
-        page = st.sidebar.radio(
-             "🖥️导航",
-             ["甲板","加入我们","获取更多", "补充美好能量", "开饭时间!","和希儿们聊天"])
-        if page == "甲板":#左侧导航页面
-            if not st.session_state.close_notice:
-                notice_box = st.expander("📢 版本更新公告", expanded=True)
-                with notice_box:
-                    st.markdown("""
-                    <style>
-                    .notice-content {
-                        max-height: 220px;
-                        overflow-y: auto;
-                        padding: 8px;
-                        font-size: 0.9rem;
-                        line-height: 1.5;
-                        margin-bottom: 8px;
-                    }
-                    </style>
-                    <div class="notice-content">
-                        <p><strong>🔖 V1.0 更新：</strong></p>
-                        <ul>
-                            <li>整体进行了优化
-                            <li>新增会话温度(想象力)调节
-                            <li>新增对话记录自定义名称
-                        </ul>
-                        <p><strong>🔖 V0.5 更新：</strong></p>
-                        <ul>
-                            <li>优化了模型,丰富了回复内容,加快回复速度减少卡顿</li>
-                        </ul>
-                        <p><strong>🔖 V0.4 更新：</strong></p>
-                        <ul>
-                            <li>新增自定义头像功能，可上传会话的头像，昵称头像永久保存</li>
-                            <li>新增会话存档功能，支持保存/加载/删除历史会话</li>
-                        </ul>
-                        <p><strong>🔖 V0.3 更新：</strong></p>
-                        <ul>
-                            <li>本地聊天记忆持久化，关闭页面重开不丢失记录（保留最近6轮对话防溢出）</li>
-                            <li>新增三档人设切换：默认希儿/增强性格/完全自定义人设</li>
-                            <li>支持一键清空聊天记录</li>
-                        </ul>
-                         <p><strong>🔖 V0.2 更新：</strong></p>
-                        <ul>
-                            <li>新增会话模块</li>
-                            <li>优化了页面布局</li>
-                        </ul>
-                        <p class="text-muted">💡 提示：回复失败可刷新页面重试，长文本加载会稍慢</p>
-                    </div>
-                    """, unsafe_allow_html=True)
-                if st.button("我知道了", use_container_width=True, key="notice_btn", type="primary"):
-                    st.session_state.close_notice = True
-                    st.rerun()
-            st.title("欢迎登舰~")
-            st.subheader("已载入")
-          #  st.divider()
-          #  st.header("加载中...")
-           # st.divider()
-           # st.subheader("加载完成")
-            st.divider()
-            st.markdown(":blue-badge[Captain on the bridge]")#标记
-            #st.badge("Captain on the bridge", color="blue")#标记
-            st.caption("舰长已抵达舰桥")#注释
-            img = Image.open(r"XT.jpg")#绝对路径获取
-            music_path = "HOYO-MiX - Gion2.flac"
-            if os.path.exists(music_path):
-                play_music = st.button("🎵 播放护肝小曲", use_container_width=True)
-                if play_music:
-                    st.audio(music_path, loop=True, autoplay=True)
-            st.image(
-                img,
-                caption="正在工作-----",
+    page = st.sidebar.radio(
+         "🖥️导航",
+         ["甲板","加入我们","获取更多", "补充美好能量", "开饭时间!","和希儿们聊天"])
+    if page == "甲板":#左侧导航页面
+        if not st.session_state.close_notice:
+            notice_box = st.expander("📢 版本更新公告", expanded=True)
+            with notice_box:
+                st.markdown("""
+                <style>
+                .notice-content {
+                    max-height: 220px;
+                    overflow-y: auto;
+                    padding: 8px;
+                    font-size: 0.9rem;
+                    line-height: 1.5;
+                    margin-bottom: 8px;
+                }
+                </style>
+                <div class="notice-content">
+                    <p><strong>🔖 V1.0 更新：</strong></p>
+                    <ul>
+                        <li>整体进行了优化
+                        <li>新增会话温度(想象力)调节
+                        <li>新增对话记录自定义名称
+                    </ul>
+                    <p><strong>🔖 V0.5 更新：</strong></p>
+                    <ul>
+                        <li>优化了模型,丰富了回复内容,加快回复速度减少卡顿</li>
+                    </ul>
+                    <p><strong>🔖 V0.4 更新：</strong></p>
+                    <ul>
+                        <li>新增自定义头像功能，可上传会话的头像，昵称头像永久保存</li>
+                        <li>新增会话存档功能，支持保存/加载/删除历史会话</li>
+                    </ul>
+                    <p><strong>🔖 V0.3 更新：</strong></p>
+                    <ul>
+                        <li>本地聊天记忆持久化，关闭页面重开不丢失记录（保留最近6轮对话防溢出）</li>
+                        <li>新增三档人设切换：默认希儿/增强性格/完全自定义人设</li>
+                        <li>支持一键清空聊天记录</li>
+                    </ul>
+                     <p><strong>🔖 V0.2 更新：</strong></p>
+                    <ul>
+                        <li>新增会话模块</li>
+                        <li>优化了页面布局</li>
+                    </ul>
+                    <p class="text-muted">💡 提示：回复失败可刷新页面重试，长文本加载会稍慢</p>
+                </div>
+                """, unsafe_allow_html=True)
+            if st.button("我知道了", use_container_width=True, key="notice_btn", type="primary"):
+                st.session_state.close_notice = True
+                st.rerun()
+        st.title("欢迎登舰~")
+        st.subheader("已载入")
+      #  st.divider()
+      #  st.header("加载中...")
+       # st.divider()
+       # st.subheader("加载完成")
+        st.divider()
+        st.markdown(":blue-badge[Captain on the bridge]")#标记
+        #st.badge("Captain on the bridge", color="blue")#标记
+        st.caption("舰长已抵达舰桥")#注释
+        img = Image.open(r"XT.jpg")#绝对路径获取
+        music_path = "HOYO-MiX - Gion2.flac"
+        if os.path.exists(music_path):
+            play_music = st.button("🎵 播放护肝小曲", use_container_width=True)
+            if play_music:
+                st.audio(music_path, loop=True, autoplay=True)
+        st.image(
+            img,
+            caption="正在工作-----",
+            width="stretch",
+            )
+        st.video(r"HD1.mp4")#仅image自带caption
+        st.caption("正在看海")
+        st.logo(r"YY.jpg")#左上角logo
+        txt=st.text_input(
+        label = "正在寻找",
+        value = "",
+        max_chars = 100,
+        placeholder = "(白希/黑希/Bro)",
+        key = "sore")
+        if txt:
+            if txt == "白希":
+                img1 = Image.open(r"BX1.jpg")
+                st.image(
+                img1,
+                caption="你好呀,舰长~",
                 width="stretch",
                 )
-            st.video(r"HD1.mp4")#仅image自带caption
-            st.caption("正在看海")
-            st.logo(r"YY.jpg")#左上角logo
-            txt=st.text_input(
-            label = "正在寻找",
-            value = "",
-            max_chars = 100,
-            placeholder = "(白希/黑希/Bro)",
-            key = "sore")
-            if txt:
-                if txt == "白希":
-                    img1 = Image.open(r"BX1.jpg")
-                    st.image(
-                    img1,
-                    caption="你好呀,舰长~",
-                    width="stretch",
-                    )
-                elif txt == "黑希":
-                    img2 = Image.open(r"HX1.jpg")
-                    st.image(
-                    img2,
-                    caption="找我有什么事吗,舰长?",
-                    width="stretch",
-                    )
-                elif txt == "Bro":
-                    img3 = Image.open(r"YY1.jpg")
-                    st.image(
-                    img3,
-                    caption="舰长你深渊掉到第11名了",
-                    width="stretch",
-                    )
-                else:
-                    st.write("什么都没有发生------")
-            choice = st.radio(
-                label = "现在要做什么呢?:",
-                options = ["和Bronya玩游戏","和希儿们出去玩","扫甲板"],
-                index = None,
-                key = 1018,
-                help = "发呆中-------",
-                captions = ["Bronya正在等待","希儿两眼放光","爱衣的肯定"])
-            if choice == "和希儿们出去玩":
-                    col1,col2 = st.columns(2)#多图片并排
-                    with col1:
-                            st.image("HX2.png",caption = "快跟上,舰长")
-                    with col2:
-                            st.image("BX3.png",caption = "我们快出发吧~") 
-            elif choice == "和Bronya玩游戏":
-                    img2 = Image.open(r"YY2.jpg")
-                    st.image(
-                    img2,
-                    caption="别楞着了,快拿着",
-                    width="stretch",
-                    )
-            elif choice == "扫甲板":
-                    img3 = Image.open(r"AY.jpg")
-                    st.image(
-                    img3,
-                    caption="老板还真是勤奋呢~",
-                    width="stretch",
-                    )
-            df = pd.DataFrame({
-                "运行人":["重装小兔","Bronya"],
-                "身份":["协同者","BOSS"]})
-            st.dataframe(df)
-    elif page == "加入我们":
-            st.link_button("正在前往","https://www.bh3.com/main")
-    elif page == "获取更多":
-            st.link_button("即将掉入","https://m.miyoushe.com/bh3")
-    elif page == "补充美好能量":
-            st.link_button("正在补充----","https://www.bilibili.com/video/BV1b44y1q7Cb")
-    elif page == "开饭时间!":
-            st.link_button("#饭就要煮好了#","https://b23.tv/KL7BNyd")
-    elif page == "和希儿们聊天":
-            try:
-                client = OpenAI(
-                api_key="ollama", 
-                base_url="https://browbeat-kept-frenzied.ngrok-free.dev/v1"  ,
+            elif txt == "黑希":
+                img2 = Image.open(r"HX1.jpg")
+                st.image(
+                img2,
+                caption="找我有什么事吗,舰长?",
+                width="stretch",
                 )
-            except Exception as e:
-                st.error(f"⚠️ 无法连接到服务，请先启动服务器: {e}")
-                st.stop()
-            DEFAULT_SYSTEM_PROMPT = LOGIN_SYSTEM_PROMPT
-            #初始化会话状态
-            if "temperature" not in st.session_state:
-                st.session_state.temperature = 0.8
-            if "rename_target" not in st.session_state:
-                st.session_state.rename_target = None
-            if "current_chat" not in st.session_state:
-                st.session_state.current_chat = current_chat()
-            if "system_mode" not in st.session_state:
-                st.session_state.system_mode = "default"  # default | enhanced | custom
-            if "system_prompt" not in st.session_state:
-                st.session_state.system_prompt = DEFAULT_SYSTEM_PROMPT
-            if "nick_name" not in st.session_state:
-                st.session_state.nick_name = "希儿"
-            if "enhanced_traits" not in st.session_state:
-                st.session_state.enhanced_traits = ""
-            if "custom_prompt" not in st.session_state:
-                st.session_state.custom_prompt = ""
-            st.session_state.user_avatar = safe_load_avatar(st.session_state.user_avatar_path)
-            st.session_state.ai_avatar = safe_load_avatar(st.session_state.ai_avatar_path)
-            def load_chat_history():
-                if os.path.exists(CHAT_FILE):
-                    try:
-                        with open(CHAT_FILE, "r", encoding="utf-8") as f:
-                            data = json.load(f)
-                            if isinstance(data, list) and len(data) > 0:# 校验读取的数据必须是列表，否则重置为人设
-                                return data
-                            else:
-                                return [{"role":"system","content": st.session_state.system_prompt}]
-                    except Exception:# json解析失败，返回纯净初始化列表
-                        return [{"role":"system","content": st.session_state.system_prompt}]
-                else:
-                    return [{"role":"system","content": st.session_state.system_prompt}]# 文件不存在，新建初始化列表
-    
-            if "chat_history" not in st.session_state:
-                st.session_state.chat_history = load_chat_history()
-            with st.sidebar:
-                st.title("💬会话")
-                if st.button("保存并新建会话", use_container_width=True,icon="📁",type="primary"):
-                    if len(st.session_state.chat_history) > 1:# 只有当会话中有有用对话时才允许保存
-                        save_archive_session()
-                        st.success("会话已存档")
-                        st.session_state.chat_history = [{"role":"system","content": st.session_state.system_prompt}]
-                        st.session_state.current_chat = current_chat()
-                        save_chat_history(st.session_state.chat_history)
-                        st.success("✅ 已新建会话")
-                        st.rerun()
-                    else:
-                        st.info("当前会话内容为空,无需保存")
-                        pass
-                st.text("📝历史会话")
-                amount = 0
-                if os.path.exists("sessions"):
-                    file_list = os.listdir("sessions")
-                    for filename in file_list:
-                        if filename.endswith(".json"):
-                            session_name = filename[:-5]  # 切片去掉 .json 后缀
-                            amount += 1
-                            cul1, cul2, cul3 = st.columns([3.2, 1, 1])
-                            with cul1:
-                                if st.button(f"({amount}):{session_name}",
-                                             use_container_width=True,
-                                             icon="📃",
-                                             key=f"load{session_name}",
-                                             type="primary" if session_name == st.session_state.current_chat else "secondary"):
-                                    load_archive_session(session_name)
-                                    st.success(f"✅已加载会话: {session_name}")
-                                    st.rerun()
-                            with cul2:
-                                if st.button("",
-                                             use_container_width=True,
-                                             icon="✏️",
-                                             key=f"rename_{session_name}"):
-                                    st.session_state.rename_target = session_name
-                                    st.rerun()
-                            with cul3:
-                                if st.button("",
-                                             use_container_width=True,
-                                             icon="❌",
-                                             key=f"del_{session_name}"):
-                                    st.session_state.need_confirm = (session_name, filename)
-                                    st.rerun()
-                else:
-                    st.text("暂无历史会话")
-                if st.session_state.rename_target is not None:
-                    old_name = st.session_state.rename_target
-                    st.markdown("#### ✏️ 重命名会话")
-                    new_name_input = st.text_input("输入新会话名称", value=old_name, key="new_session_name")
-                    r1, r2 = st.columns(2)
-                    with r1:
-                        if st.button("确认重命名", type="primary"):
-                            new_name = new_name_input.strip()
-                            if new_name and new_name != old_name:
-                                old_path = os.path.join("sessions", f"{old_name}.json")
-                                new_path = os.path.join("sessions", f"{new_name}.json")
-                                if os.path.exists(old_path):
-                                    os.rename(old_path, new_path)
-                                    # 如果当前正在使用这个会话，同步更新current_chat
-                                    if st.session_state.current_chat == old_name:
-                                        st.session_state.current_chat = new_name
-                                    st.success(f"✅ 已重命名：{old_name} → {new_name}")
-                            st.session_state.rename_target = None
-                            st.rerun()
-                    with r2:
-                        if st.button("取消"):
-                            st.session_state.rename_target = None
-                            st.rerun()
-                st.divider()
-                st.markdown("### ♾️自定义名字")
-                nick_name = st.text_input("名字",placeholder = "默认:希儿",key = "user_name")
-                if st.button("保存昵称", use_container_width=True,icon="⚜️"):
-                    if nick_name:
-                        st.session_state.nick_name = nick_name.strip()
-                    else:
-                        st.session_state.nick_name = "希儿"
-                    st.success("昵称已保存")
-                    st.rerun()
-                st.divider()
-                st.markdown("### 🎭 人设模式")
-                mode = st.radio(
-                    "选择人设模式",
-                    ["默认希儿", "增强性格", "自定义人设"],
-                    index=0,
-                    key="system_mode_radio"
+            elif txt == "Bro":
+                img3 = Image.open(r"YY1.jpg")
+                st.image(
+                img3,
+                caption="舰长你深渊掉到第11名了",
+                width="stretch",
                 )
-                mode_map = {#模式映射
-                    "默认希儿": "default",
-                    "增强性格": "enhanced",
-                    "自定义人设": "custom"
-                }
-                st.session_state.system_mode = mode_map[mode]
-                enhanced_input = st.text_area(
-                    "为希儿追加性格特点",
-                    placeholder="默认性格",
-                    key="enhanced_input",
-                    disabled=(st.session_state.system_mode != "enhanced"),
-                    height=120
+            else:
+                st.write("什么都没有发生------")
+        choice = st.radio(
+            label = "现在要做什么呢?:",
+            options = ["和Bronya玩游戏","和希儿们出去玩","扫甲板"],
+            index = None,
+            key = 1018,
+            help = "发呆中-------",
+            captions = ["Bronya正在等待","希儿两眼放光","爱衣的肯定"])
+        if choice == "和希儿们出去玩":
+                col1,col2 = st.columns(2)#多图片并排
+                with col1:
+                        st.image("HX2.png",caption = "快跟上,舰长")
+                with col2:
+                        st.image("BX3.png",caption = "我们快出发吧~") 
+        elif choice == "和Bronya玩游戏":
+                img2 = Image.open(r"YY2.jpg")
+                st.image(
+                img2,
+                caption="别楞着了,快拿着",
+                width="stretch",
                 )
-                custom_input = st.text_area(
-                    "完全自定义人设",
-                    placeholder="待设置",
-                    key="custom_input",
-                    disabled=(st.session_state.system_mode != "custom"),
-                    height=120
+        elif choice == "扫甲板":
+                img3 = Image.open(r"AY.jpg")
+                st.image(
+                img3,
+                caption="老板还真是勤奋呢~",
+                width="stretch",
                 )
-                if st.button("✅ 应用人设", use_container_width=True,icon="👤"):
-                    if st.session_state.system_mode == "enhanced":
-                        traits = enhanced_input.strip()
-                        st.session_state.enhanced_traits = traits
-                        base = DEFAULT_SYSTEM_PROMPT
-                        if traits:
-                            st.session_state.system_prompt = f"{base}\n【额外性格特点】\n{traits}\n名字：{st.session_state.nick_name}"
-                        else:
-                            st.session_state.system_prompt = base
-                        st.session_state.chat_history = [{#增强人设模式下，重置系统消息
-                            "role": "system",
-                            "content": st.session_state.system_prompt
-                              }]
-                    elif st.session_state.system_mode == "custom":
-                        custom = custom_input.strip()
-                        st.session_state.custom_prompt = custom
-                        st.session_state.system_prompt = custom or DEFAULT_SYSTEM_PROMPT
-                    else:  # default
-                        st.session_state.system_prompt = DEFAULT_SYSTEM_PROMPT
-                    if st.session_state.chat_history:
-                        st.session_state.chat_history[0] = {
-                            "role": "system",
-                            "content": st.session_state.system_prompt
-                        }
-                    save_chat_history(st.session_state.chat_history)
-                    st.success("人设已应用")
-                    st.rerun()
-                st.divider()
-                st.markdown("### ⚙️模型参数")
-                st.session_state.temperature = st.slider(
-                    "temperature 温度（脑洞程度）",
-                    min_value=0.1,
-                    max_value=1.2,
-                    value=st.session_state.temperature,
-                    step=0.05,
-                    help="偏低：回答稳定、性格规整；偏高：脑洞更大、对话更自由"
-                )
-                st.markdown("### 🖼 自定义头像")
-                user_file = st.file_uploader(
-                    "上传你的头像",
-                    type=["jpg", "jpeg", "png"],
-                    key="upload_user"
-                )
-                if user_file:
-                    avatar_path = save_uploaded_avatar(user_file, "user")
-                    if avatar_path:
-                        st.session_state.user_avatar_path = avatar_path
-                        st.session_state.user_avatar = Image.open(avatar_path)
-                        st.success("你的头像已更新")
-                ai_file = st.file_uploader(
-                    f"上传{st.session_state.nick_name}的头像",
-                    type=["jpg", "jpeg", "png"],
-                    key="upload_ai"
-                )
-                if ai_file:
-                    avatar_path = save_uploaded_avatar(ai_file, "ai")
-                    if avatar_path:
-                        st.session_state.ai_avatar_path = avatar_path
-                        st.session_state.ai_avatar = Image.open(avatar_path)
-                        st.success(f"{st.session_state.nick_name}的头像已更新")
-                st.divider()
-                if st.button("清空全部对话历史", use_container_width=True,icon="❌"):
-                    clean_history = [{"role": "system", "content": st.session_state.system_prompt}]
-                    st.session_state.chat_history = clean_history
-                    st.session_state.notice_showed = False#强制写入新的json覆盖
-                    save_chat_history(st.session_state.chat_history)
-                    st.rerun()
-            for msg in st.session_state.chat_history[1:]:
-                if msg["role"] == "user":
-                    st.chat_message("我",avatar = st.session_state.user_avatar).write(msg["content"])
-                else:
-                    st.chat_message(st.session_state.nick_name,avatar = st.session_state.ai_avatar).write(msg["content"])
-            prompt = st.chat_input(f"对{st.session_state.nick_name}说些什么呢?")
-            if prompt:
-                st.session_state.chat_history.append({"role": "user", "content": prompt})
-                st.chat_message("我",avatar = st.session_state.user_avatar).write(prompt)
-                loading_placeholder = st.empty()
-                loading_placeholder.write("📡 通讯链接中......")
+        df = pd.DataFrame({
+            "运行人":["重装小兔","Bronya"],
+            "身份":["协同者","BOSS"]})
+        st.dataframe(df)
+elif page == "加入我们":
+        st.link_button("正在前往","https://www.bh3.com/main")
+elif page == "获取更多":
+        st.link_button("即将掉入","https://m.miyoushe.com/bh3")
+elif page == "补充美好能量":
+        st.link_button("正在补充----","https://www.bilibili.com/video/BV1b44y1q7Cb")
+elif page == "开饭时间!":
+        st.link_button("#饭就要煮好了#","https://b23.tv/KL7BNyd")
+elif page == "和希儿们聊天":
+        try:
+            client = OpenAI(
+            api_key="ollama", 
+            base_url="https://browbeat-kept-frenzied.ngrok-free.dev/v1"  ,
+            )
+        except Exception as e:
+            st.error(f"⚠️ 无法连接到服务，请先启动服务器: {e}")
+            st.stop()
+        DEFAULT_SYSTEM_PROMPT = LOGIN_SYSTEM_PROMPT
+        #初始化会话状态
+        if "temperature" not in st.session_state:
+            st.session_state.temperature = 0.8
+        if "rename_target" not in st.session_state:
+            st.session_state.rename_target = None
+        if "current_chat" not in st.session_state:
+            st.session_state.current_chat = current_chat()
+        if "system_mode" not in st.session_state:
+            st.session_state.system_mode = "default"  # default | enhanced | custom
+        if "system_prompt" not in st.session_state:
+            st.session_state.system_prompt = DEFAULT_SYSTEM_PROMPT
+        if "nick_name" not in st.session_state:
+            st.session_state.nick_name = "希儿"
+        if "enhanced_traits" not in st.session_state:
+            st.session_state.enhanced_traits = ""
+        if "custom_prompt" not in st.session_state:
+            st.session_state.custom_prompt = ""
+        st.session_state.user_avatar = safe_load_avatar(st.session_state.user_avatar_path)
+        st.session_state.ai_avatar = safe_load_avatar(st.session_state.ai_avatar_path)
+        def load_chat_history():
+            if os.path.exists(CHAT_FILE):
                 try:
-                    print(prompt)
-                    raw_history = st.session_state.chat_history.copy()
-                    if not raw_history:
-                        raw_history = [{"role":"system","content": st.session_state.system_prompt}]
-                    system_msg = {
-                            "role": "system",
-                            "content": st.session_state.system_prompt
-                        }
-                    chat_only = [
-                        msg for msg in st.session_state.chat_history
-                        if msg["role"] in ("user", "assistant")
-                        ]
-                    max_round = 6
-                    if len(chat_only) > max_round * 2:
-                        chat_only = chat_only[-max_round * 2:]
-                    request_messages = [system_msg] + chat_only
-                    response = client.chat.completions.create(
-                        model="qwen3.5:9b",
-                        messages= request_messages,
-                        stream=True,
-                        extra_body={
-                            "num_ctx":8192,
-                            "num_predict":2048,
-                            "temperature":st.session_state.temperature
-                            }
-                    )
-                    loading_placeholder.empty()
-                    ai_box = st.chat_message(st.session_state.nick_name, avatar=st.session_state.ai_avatar)
-                    text_box = ai_box.empty()
-                    full_reply = ""
-                    for chunk in response:
-                        try:
-                            choice = chunk.choices[0]
-                            delta = choice.delta.content
-                            if delta:
-                                full_reply += delta
-                                text_box.write(full_reply)
-                            if choice.finish_reason is not None and full_reply:
-                                break
-                        except:
-                            continue
-                    full_reply = full_reply.strip()
-                    if not full_reply:
-                        full_reply = "……（低着头,没有说话）"
-                    st.session_state.chat_history.append({
-                        "role": "assistant",
-                        "content": full_reply
-                            })
+                    with open(CHAT_FILE, "r", encoding="utf-8") as f:
+                        data = json.load(f)
+                        if isinstance(data, list) and len(data) > 0:# 校验读取的数据必须是列表，否则重置为人设
+                            return data
+                        else:
+                            return [{"role":"system","content": st.session_state.system_prompt}]
+                except Exception:# json解析失败，返回纯净初始化列表
+                    return [{"role":"system","content": st.session_state.system_prompt}]
+            else:
+                return [{"role":"system","content": st.session_state.system_prompt}]# 文件不存在，新建初始化列表
+
+        if "chat_history" not in st.session_state:
+            st.session_state.chat_history = load_chat_history()
+        with st.sidebar:
+            st.title("💬会话")
+            if st.button("保存并新建会话", use_container_width=True,icon="📁",type="primary"):
+                if len(st.session_state.chat_history) > 1:# 只有当会话中有有用对话时才允许保存
+                    save_archive_session()
+                    st.success("会话已存档")
+                    st.session_state.chat_history = [{"role":"system","content": st.session_state.system_prompt}]
+                    st.session_state.current_chat = current_chat()
                     save_chat_history(st.session_state.chat_history)
-                    save_archive_session() #对话后保存到save_archive_session
-                    print(full_reply)
-                except Exception as e:
-                    loading_placeholder.empty()
-                    st.error(f"⚠️{st.session_state.nick_name}失去讯号中......:{e}")
+                    st.success("✅ 已新建会话")
+                    st.rerun()
+                else:
+                    st.info("当前会话内容为空,无需保存")
+                    pass
+            st.text("📝历史会话")
+            amount = 0
+            if os.path.exists("sessions"):
+                file_list = os.listdir("sessions")
+                for filename in file_list:
+                    if filename.endswith(".json"):
+                        session_name = filename[:-5]  # 切片去掉 .json 后缀
+                        amount += 1
+                        cul1, cul2, cul3 = st.columns([3.2, 1, 1])
+                        with cul1:
+                            if st.button(f"({amount}):{session_name}",
+                                         use_container_width=True,
+                                         icon="📃",
+                                         key=f"load{session_name}",
+                                         type="primary" if session_name == st.session_state.current_chat else "secondary"):
+                                load_archive_session(session_name)
+                                st.success(f"✅已加载会话: {session_name}")
+                                st.rerun()
+                        with cul2:
+                            if st.button("",
+                                         use_container_width=True,
+                                         icon="✏️",
+                                         key=f"rename_{session_name}"):
+                                st.session_state.rename_target = session_name
+                                st.rerun()
+                        with cul3:
+                            if st.button("",
+                                         use_container_width=True,
+                                         icon="❌",
+                                         key=f"del_{session_name}"):
+                                st.session_state.need_confirm = (session_name, filename)
+                                st.rerun()
+            else:
+                st.text("暂无历史会话")
+            if st.session_state.rename_target is not None:
+                old_name = st.session_state.rename_target
+                st.markdown("#### ✏️ 重命名会话")
+                new_name_input = st.text_input("输入新会话名称", value=old_name, key="new_session_name")
+                r1, r2 = st.columns(2)
+                with r1:
+                    if st.button("确认重命名", type="primary"):
+                        new_name = new_name_input.strip()
+                        if new_name and new_name != old_name:
+                            old_path = os.path.join("sessions", f"{old_name}.json")
+                            new_path = os.path.join("sessions", f"{new_name}.json")
+                            if os.path.exists(old_path):
+                                os.rename(old_path, new_path)
+                                # 如果当前正在使用这个会话，同步更新current_chat
+                                if st.session_state.current_chat == old_name:
+                                    st.session_state.current_chat = new_name
+                                st.success(f"✅ 已重命名：{old_name} → {new_name}")
+                        st.session_state.rename_target = None
+                        st.rerun()
+                with r2:
+                    if st.button("取消"):
+                        st.session_state.rename_target = None
+                        st.rerun()
+            st.divider()
+            st.markdown("### ♾️自定义名字")
+            nick_name = st.text_input("名字",placeholder = "默认:希儿",key = "user_name")
+            if st.button("保存昵称", use_container_width=True,icon="⚜️"):
+                if nick_name:
+                    st.session_state.nick_name = nick_name.strip()
+                else:
+                    st.session_state.nick_name = "希儿"
+                st.success("昵称已保存")
+                st.rerun()
+            st.divider()
+            st.markdown("### 🎭 人设模式")
+            mode = st.radio(
+                "选择人设模式",
+                ["默认希儿", "增强性格", "自定义人设"],
+                index=0,
+                key="system_mode_radio"
+            )
+            mode_map = {#模式映射
+                "默认希儿": "default",
+                "增强性格": "enhanced",
+                "自定义人设": "custom"
+            }
+            st.session_state.system_mode = mode_map[mode]
+            enhanced_input = st.text_area(
+                "为希儿追加性格特点",
+                placeholder="默认性格",
+                key="enhanced_input",
+                disabled=(st.session_state.system_mode != "enhanced"),
+                height=120
+            )
+            custom_input = st.text_area(
+                "完全自定义人设",
+                placeholder="待设置",
+                key="custom_input",
+                disabled=(st.session_state.system_mode != "custom"),
+                height=120
+            )
+            if st.button("✅ 应用人设", use_container_width=True,icon="👤"):
+                if st.session_state.system_mode == "enhanced":
+                    traits = enhanced_input.strip()
+                    st.session_state.enhanced_traits = traits
+                    base = DEFAULT_SYSTEM_PROMPT
+                    if traits:
+                        st.session_state.system_prompt = f"{base}\n【额外性格特点】\n{traits}\n名字：{st.session_state.nick_name}"
+                    else:
+                        st.session_state.system_prompt = base
+                    st.session_state.chat_history = [{#增强人设模式下，重置系统消息
+                        "role": "system",
+                        "content": st.session_state.system_prompt
+                          }]
+                elif st.session_state.system_mode == "custom":
+                    custom = custom_input.strip()
+                    st.session_state.custom_prompt = custom
+                    st.session_state.system_prompt = custom or DEFAULT_SYSTEM_PROMPT
+                else:  # default
+                    st.session_state.system_prompt = DEFAULT_SYSTEM_PROMPT
+                if st.session_state.chat_history:
+                    st.session_state.chat_history[0] = {
+                        "role": "system",
+                        "content": st.session_state.system_prompt
+                    }
+                save_chat_history(st.session_state.chat_history)
+                st.success("人设已应用")
+                st.rerun()
+            st.divider()
+            st.markdown("### ⚙️模型参数")
+            st.session_state.temperature = st.slider(
+                "temperature 温度（脑洞程度）",
+                min_value=0.1,
+                max_value=1.2,
+                value=st.session_state.temperature,
+                step=0.05,
+                help="偏低：回答稳定、性格规整；偏高：脑洞更大、对话更自由"
+            )
+            st.markdown("### 🖼 自定义头像")
+            user_file = st.file_uploader(
+                "上传你的头像",
+                type=["jpg", "jpeg", "png"],
+                key="upload_user"
+            )
+            if user_file:
+                avatar_path = save_uploaded_avatar(user_file, "user")
+                if avatar_path:
+                    st.session_state.user_avatar_path = avatar_path
+                    st.session_state.user_avatar = Image.open(avatar_path)
+                    st.success("你的头像已更新")
+            ai_file = st.file_uploader(
+                f"上传{st.session_state.nick_name}的头像",
+                type=["jpg", "jpeg", "png"],
+                key="upload_ai"
+            )
+            if ai_file:
+                avatar_path = save_uploaded_avatar(ai_file, "ai")
+                if avatar_path:
+                    st.session_state.ai_avatar_path = avatar_path
+                    st.session_state.ai_avatar = Image.open(avatar_path)
+                    st.success(f"{st.session_state.nick_name}的头像已更新")
+            st.divider()
+            if st.button("清空全部对话历史", use_container_width=True,icon="❌"):
+                clean_history = [{"role": "system", "content": st.session_state.system_prompt}]
+                st.session_state.chat_history = clean_history
+                st.session_state.notice_showed = False#强制写入新的json覆盖
+                save_chat_history(st.session_state.chat_history)
+                st.rerun()
+        for msg in st.session_state.chat_history[1:]:
+            if msg["role"] == "user":
+                st.chat_message("我",avatar = st.session_state.user_avatar).write(msg["content"])
+            else:
+                st.chat_message(st.session_state.nick_name,avatar = st.session_state.ai_avatar).write(msg["content"])
+        prompt = st.chat_input(f"对{st.session_state.nick_name}说些什么呢?")
+        if prompt:
+            st.session_state.chat_history.append({"role": "user", "content": prompt})
+            st.chat_message("我",avatar = st.session_state.user_avatar).write(prompt)
+            loading_placeholder = st.empty()
+            loading_placeholder.write("📡 通讯链接中......")
+            try:
+                print(prompt)
+                raw_history = st.session_state.chat_history.copy()
+                if not raw_history:
+                    raw_history = [{"role":"system","content": st.session_state.system_prompt}]
+                system_msg = {
+                        "role": "system",
+                        "content": st.session_state.system_prompt
+                    }
+                chat_only = [
+                    msg for msg in st.session_state.chat_history
+                    if msg["role"] in ("user", "assistant")
+                    ]
+                max_round = 6
+                if len(chat_only) > max_round * 2:
+                    chat_only = chat_only[-max_round * 2:]
+                request_messages = [system_msg] + chat_only
+                response = client.chat.completions.create(
+                    model="qwen3.5:9b",
+                    messages= request_messages,
+                    stream=True,
+                    extra_body={
+                        "num_ctx":8192,
+                        "num_predict":2048,
+                        "temperature":st.session_state.temperature
+                        }
+                )
+                loading_placeholder.empty()
+                ai_box = st.chat_message(st.session_state.nick_name, avatar=st.session_state.ai_avatar)
+                text_box = ai_box.empty()
+                full_reply = ""
+                for chunk in response:
+                    try:
+                        choice = chunk.choices[0]
+                        delta = choice.delta.content
+                        if delta:
+                            full_reply += delta
+                            text_box.write(full_reply)
+                        if choice.finish_reason is not None and full_reply:
+                            break
+                    except:
+                        continue
+                full_reply = full_reply.strip()
+                if not full_reply:
+                    full_reply = "……（低着头,没有说话）"
+                st.session_state.chat_history.append({
+                    "role": "assistant",
+                    "content": full_reply
+                        })
+                save_chat_history(st.session_state.chat_history)
+                save_archive_session() #对话后保存到save_archive_session
+                print(full_reply)
+            except Exception as e:
+                loading_placeholder.empty()
+                st.error(f"⚠️{st.session_state.nick_name}失去讯号中......:{e}")
                     print("capture error",e)
