@@ -572,4 +572,4 @@ else:
                 except Exception as e:
                     loading_placeholder.empty()
                     st.error(f"⚠️{st.session_state.nick_name}失去讯号中......:{e}")
-                        print("capture error",e)
+                    print("capture error",e)
