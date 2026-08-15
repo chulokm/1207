@@ -141,6 +141,7 @@ if not st.session_state.logged_in:
         else:
                 st.error("error,登舰失败----")
 else: 
+    page = None
     if not st.session_state.close_notice:
         page = st.sidebar.radio(
              "🖥️导航",
