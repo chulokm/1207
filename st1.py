@@ -142,57 +142,57 @@ if not st.session_state.logged_in:
                 st.error("error,登舰失败----")
 else: 
     if not st.session_state.close_notice:
-        notice_box = st.expander("📢 版本更新公告", expanded=True)
-        with notice_box:
-            st.markdown("""
-            <style>
-            .notice-content {
-                max-height: 220px;
-                overflow-y: auto;
-                padding: 8px;
-                font-size: 0.9rem;
-                line-height: 1.5;
-                margin-bottom: 8px;
-            }
-            </style>
-            <div class="notice-content">
-                <p><strong>🔖 V1.0 更新：</strong></p>
-                <ul>
-                    <li>整体进行了优化
-                    <li>新增会话温度(想象力)调节
-                    <li>新增对话记录自定义名称
-                </ul>
-                <p><strong>🔖 V0.5 更新：</strong></p>
-                <ul>
-                    <li>优化了模型,丰富了回复内容,加快回复速度减少卡顿</li>
-                </ul>
-                <p><strong>🔖 V0.4 更新：</strong></p>
-                <ul>
-                    <li>新增自定义头像功能，可上传会话的头像，昵称头像永久保存</li>
-                    <li>新增会话存档功能，支持保存/加载/删除历史会话</li>
-                </ul>
-                <p><strong>🔖 V0.3 更新：</strong></p>
-                <ul>
-                    <li>本地聊天记忆持久化，关闭页面重开不丢失记录（保留最近6轮对话防溢出）</li>
-                    <li>新增三档人设切换：默认希儿/增强性格/完全自定义人设</li>
-                    <li>支持一键清空聊天记录</li>
-                </ul>
-                 <p><strong>🔖 V0.2 更新：</strong></p>
-                <ul>
-                    <li>新增会话模块</li>
-                    <li>优化了页面布局</li>
-                </ul>
-                <p class="text-muted">💡 提示：回复失败可刷新页面重试，长文本加载会稍慢</p>
-            </div>
-            """, unsafe_allow_html=True)
         
-        if st.button("我知道了", use_container_width=True, key="notice_btn", type="primary"):
-            st.session_state.close_notice = True
-            st.rerun()
     page = st.sidebar.radio(
          "🖥️导航",
          ["甲板","加入我们","获取更多", "补充美好能量", "开饭时间!","和希儿们聊天"])
     if page == "甲板":#左侧导航页面
+            notice_box = st.expander("📢 版本更新公告", expanded=True)
+            with notice_box:
+                st.markdown("""
+                <style>
+                .notice-content {
+                    max-height: 220px;
+                    overflow-y: auto;
+                    padding: 8px;
+                    font-size: 0.9rem;
+                    line-height: 1.5;
+                    margin-bottom: 8px;
+                }
+                </style>
+                <div class="notice-content">
+                    <p><strong>🔖 V1.0 更新：</strong></p>
+                    <ul>
+                        <li>整体进行了优化
+                        <li>新增会话温度(想象力)调节
+                        <li>新增对话记录自定义名称
+                    </ul>
+                    <p><strong>🔖 V0.5 更新：</strong></p>
+                    <ul>
+                        <li>优化了模型,丰富了回复内容,加快回复速度减少卡顿</li>
+                    </ul>
+                    <p><strong>🔖 V0.4 更新：</strong></p>
+                    <ul>
+                        <li>新增自定义头像功能，可上传会话的头像，昵称头像永久保存</li>
+                        <li>新增会话存档功能，支持保存/加载/删除历史会话</li>
+                    </ul>
+                    <p><strong>🔖 V0.3 更新：</strong></p>
+                    <ul>
+                        <li>本地聊天记忆持久化，关闭页面重开不丢失记录（保留最近6轮对话防溢出）</li>
+                        <li>新增三档人设切换：默认希儿/增强性格/完全自定义人设</li>
+                        <li>支持一键清空聊天记录</li>
+                    </ul>
+                     <p><strong>🔖 V0.2 更新：</strong></p>
+                    <ul>
+                        <li>新增会话模块</li>
+                        <li>优化了页面布局</li>
+                    </ul>
+                    <p class="text-muted">💡 提示：回复失败可刷新页面重试，长文本加载会稍慢</p>
+                </div>
+                """, unsafe_allow_html=True)
+            if st.button("我知道了", use_container_width=True, key="notice_btn", type="primary"):
+                st.session_state.close_notice = True
+                st.rerun()
             st.title("欢迎登舰~")
             st.subheader("已载入")
           #  st.divider()
